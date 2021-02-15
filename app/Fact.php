@@ -439,7 +439,7 @@ class Fact
      *
      * @deprecated since 2.0.5.  Will be removed in 2.1.0
      */
-    public function setTag(string $tag): void
+    public function setTag($tag): void
     {
         $this->tag = $tag;
     }
@@ -825,5 +825,15 @@ class Fact
     public function __toString(): string
     {
         return $this->id . '@' . $this->record->xref();
+    }
+
+    /**
+     * Add blank lines, to allow a user to add/edit new values.
+     *
+     * @return string
+     */
+    public function insertMissingSubtags(): string
+    {
+        return $this->record()->insertMissingLevels($this->tag(), $this->gedcom());
     }
 }
